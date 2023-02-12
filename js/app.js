@@ -8,25 +8,25 @@ let allStores = [];
 let thead = document.querySelector('thead');
 let tbody = document.querySelector('tbody');
 let tfoot = document.querySelector('tfoot');
-
-function City(name,min,max,avg) {
-  this.name=name;
-  this.min=min;
-  this.max=max;
-  this.avg=avg;
+//console.log(hours.length);
+function City(name, min, max, avg) {
+  this.name = name;
+  this.min = min;
+  this.max = max;
+  this.avg = avg;
   this.salesByHourArray = [],
   this.dailyTotal = 0,
 
   this.getNumberOfRandomCustomers = function () {
-    return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
+  return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
   };
 
   this.generateCookiesPerHour = function () {
     for (let i = 0; i < hours.length; i++) {
       let customers = this.getNumberOfRandomCustomers();
-      
+
       let cookiesSoldThisHour = Math.ceil(customers * this.avg);
-      this.dailyTotal+= cookiesSoldThisHour;
+      this.dailyTotal += cookiesSoldThisHour;
       this.salesByHourArray.push(cookiesSoldThisHour);
 
     }
@@ -59,13 +59,13 @@ function City(name,min,max,avg) {
 
 let seattle = new City('seattle', 23, 65, 6.3);
 let tokyo = new City('tokyo', 3, 24, 1.2);
-let dubai = new City('dubai', 11,38,3.7);
-let paris = new City('paris', 20,38,2.3);
-let lima = new City('lima', 2,16,4.6);
+let dubai = new City('dubai', 11, 38, 3.7);
+let paris = new City('paris', 20, 38, 2.3);
+let lima = new City('lima', 2, 16, 4.6);
 
-allStores.push(seattle, paris, tokyo, dubai, lima );
+allStores.push(seattle, paris, tokyo, dubai, lima);
 
-for(let i = 0; i < allStores.length; i++) {
+for (let i = 0; i < allStores.length; i++) {
   allStores[i].render();
 }
 
@@ -78,7 +78,7 @@ function createHeaderRow() {
 
   thead.appendChild(tableRow);
 
-  for(let i= 0; i <hours.length; i++) {
+  for (let i = 0; i < hours.length; i++) {
     let hour = document.createElement('th');
     hour.textContent = hours[i];
     tableRow.appendChild(hour);
@@ -96,13 +96,13 @@ function createTableBody() {
 
 
 
-  for(let i = 0; i < allStores.length; i++) {
+  for (let i = 0; i < allStores.length; i++) {
     let tableRow = document.createElement('tr');
     let storeName = document.createElement('td');
     storeName.textContent = allStores[i].name;
     tableRow.appendChild(storeName);
 
-    for(let j= 0; j < hours.length; j++) {
+    for (let j = 0; j < hours.length; j++) {
       allStores[i].salesByHourArray[j];
       // console.log(allStores[i].salesByHourArray[j]);
 
@@ -115,22 +115,39 @@ function createTableBody() {
     dailyTotal.textContent = allStores[i].dailyTotal;
     tableRow.appendChild(dailyTotal);
 
-    
+
     tbody.appendChild(tableRow);
   }
 }
 
-function createFooterRow(){
-  console.log(allStores);
-
-  let tableRow = document.createElement('tfoot');
-
-
+function createFooterRow() {
+  let footerRow = document.querySelector('tfoot');
+  footerRow.textContent = 'Totals';
+  //tfoot.appendChild(footerRow);
 
 
+  for (let i = 0; i < hours.length; i++) {
+    let runningTotal = 0;
+    for (let j = 0; j < allStores.length; j++) {
+      runningTotal += allStores[j].salesByHourArray[i];
+    }
+    console.log(runningTotal);
+    let footerTotal = document.createElement('td');
+    footerTotal.textContent = runningTotal;
+    footerRow.appendChild(footerTotal);
 
+    // footerTotal.textContent = 'total';
+    // footerRow.appendChild(tfoot);
+
+    // footerTotal.appendChild(footerRow);
+    //console.log(hours.length);
+
+
+  }
 
 }
+
+//salesByHourArray[i] and add to placeholder value through the length of allStores array. after finished with that hour create a td, give td text content of placeholder value and append tp the tfoot.
 
 
 
