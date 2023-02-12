@@ -10,6 +10,20 @@ td, th {
 thead, th {
   font-weight: bold;
 }
-tfoot {
-  background-color: rgb(112, 159, 165, .1);
+
+body{
+  background-color: aqua;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+
 }
+
+div{
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  display: flex;
+}
+
+
+
+
