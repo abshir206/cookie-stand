@@ -155,6 +155,25 @@ createHeaderRow();
 createTableBody();
 createFooterRow();
 
+let form = document.querySelector('form');
+let handleSubmit = function(event){
+  event.preventDefault();
+
+  let storeName = event.target.Add.value;
+  let storeMin = parseInt(event.target.Min.value);
+  let storeMax = parseInt(event.target.Max.Value);
+  let storeAvg =parseInt(event.target.Avg.value);
+  
+  let newStorelocation = new City( storeName, storeMin, storeMax, storeAvg);
+  allStores.push(newStorelocation);
+  newStorelocation.getNumberOfRandomCustomers();
+  newStorelocation.cookiesSoldThisHour();
+  newStorelocation.render();
+};
+form.addEventListener('submit', handleSubmit);
+
+console.log(allStores[5]);
+
 
 
 
